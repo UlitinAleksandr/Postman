@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "e3f7c913-1008-4efb-81b1-0b48e96c757c",
+		"name": "POST method",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20812679"
+	},
+	"item": [
+		{
+			"name": "Метод создания нового пользователя",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Новый пользователь 'morpheus' с работой 'leader' создан. Cтатус код 201.\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.name).to.eql(\"morpheus\");\r",
+							"    pm.expect(responseJson.job).to.eql(\"leader\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": {{name}},\r\n    \"job\": \"leader\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Метод получения токена и id пользователя",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Токен и id пользователя получены успешно. Cтатус код 200.\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.id).to.eql(4);\r",
+							"    pm.expect(responseJson.token).to.eql(\"QpwL5tke4Pnpja7X4\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": {{eve_mail}},\r\n    \"password\": {{password}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Метод неудачной регистрации пользователя используя только email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Пользователя нельзя зарегистрировать указав только email. Cтатус код 400.\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.error).to.eql(\"Missing password\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"sydney@fife\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Метод успешной авторизации пользователя",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Пользователь с email 'eve.holt@reqres.in' успешно авторизован. Cтатус код 200.\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.token).to.eql(\"QpwL5tke4Pnpja7X4\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": {{eve_mail}},\r\n    \"password\": \"cityslicka\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Метод неудачной авторизации пользователя с использованием только email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Пользователь указав только email не сможет авторизоваться. Cтатус код 400.\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.error).to.eql(\"Missing password\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"peter@klaven\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

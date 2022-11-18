@@ -1,0 +1,33 @@
+{
+	"id": "38b974a9-afe3-4c77-879a-237c7c05f682",
+	"values": [
+		{
+			"key": "url",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "name",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "eve_mail",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "password",
+			"value": "",
+			"type": "secret",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2022-11-18T08:43:02.164Z",
+	"_postman_exported_using": "Postman/10.2.2"
+}
